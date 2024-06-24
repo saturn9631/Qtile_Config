@@ -78,10 +78,10 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    #Key("XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Turns up the volume"),
-    #Key("XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Turns down the volume"),
-    #Key("XF86MonoBrightnessUp", lazy.widget["backlight"].change_backlight(backlight.ChangDirection.UP), desc="Turns up the brightess"),
-    #Key("XF86MonoBrightnessDown",lazy.widget["backlight"].change_backlight(backlight.ChangDirection.DOWN), desc="Turns down the brightness")
+    Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Turns up the volume"),
+    Key([], "XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Turns down the volume"),
+    #Key([], "XF86MonBrightnessUp", lazy.widget["backlight"].change_backlight(widget.backlight.ChangeDirection.UP), desc="Turns up the brightess"),
+    #Key([], "XF86MonBrightnessDown",lazy.widget["backlight"].change_backlight(widget.backlight.ChangeDirection.DOWN), desc="Turns down the brightness")
 
 ]
 
@@ -148,13 +148,16 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("default config", name="default"),
+                widget.TextBox("Commit 2 config.", name="default"),
                 widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %H:%M %p"),
                 widget.QuickExit(),
+                widget.Battery(battery="BAT1", update_interval=60, charge_char = "+", discharge_char = "-", full_char = "f", low_background="FF0000", low_foreground="FFB400"),
+                widget.Volume(),
+                #widget.Backlight(backlight_name="intel_backlight", change_command="backlightctl set {0}")
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
