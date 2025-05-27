@@ -30,7 +30,7 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 mod = "mod4"
-terminal = guess_terminal()
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -64,7 +64,7 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn("alacritty"), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
@@ -78,14 +78,15 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Turns up the volume"),
-    Key([], "XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Turns down the volume"),
+    Key([mod, "shift"], "r", lazy.spawn("rofi -show drun"), desc="Application list"),
+    #Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Turns up the volume"),
+    #Key([], "XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Turns down the volume"),
     #Key([], "XF86MonBrightnessUp", lazy.widget["backlight"].change_backlight(widget.backlight.ChangeDirection.UP), desc="Turns up the brightess"),
     #Key([], "XF86MonBrightnessDown",lazy.widget["backlight"].change_backlight(widget.backlight.ChangeDirection.DOWN), desc="Turns down the brightness")
 
 ]
 
-groups = [Group(i) for i in "uiop"]
+groups = [Group(i) for i in "yuiop"]
 
 for i in groups:
     keys.extend(
@@ -113,18 +114,18 @@ for i in groups:
 
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    #layout.Max(),
+    #Try more layouts by unleashing below layouts.
+    #layout.Stack(num_stacks=2),
+    #layout.Bsp(),
+    #layout.Matrix(),
+    #layout.MonadTall(),
+    #layout.MonadWide(),
+    #layout.RatioTile(),
+    #layout.Tile(),
+    #layout.TreeTab(),
+    #layout.VerticalTile(),
+    #layout.Zoomy(),
 ]
 
 widget_defaults = dict(
@@ -149,15 +150,15 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 widget.TextBox("Commit 2 config.", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                #widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %H:%M %p"),
+                widget.StatusNotifier(),
+                #widget.Systray(),
+                widget.Clock(format="%Y-%m-%d %a %H:%M "),
                 widget.QuickExit(),
                 widget.Battery(battery="BAT1", update_interval=60, charge_char = "+", discharge_char = "-", full_char = "f", low_background="FF0000", low_foreground="FFB400"),
                 widget.Volume(),
-                #widget.Backlight(backlight_name="intel_backlight", change_command="backlightctl set {0}")
+                widget.Backlight(backlight_name="intel_backlight", change_command="backlightctl set {0}")
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
@@ -214,4 +215,4 @@ wl_input_rules = None
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+wmname = "Qtile"
