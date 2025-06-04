@@ -68,23 +68,23 @@ keys = [
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key(
-        [mod],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
+    Key([mod],"f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "r", lazy.spawn("rofi -show drun"), desc="Application list"),
+    Key([mod], "m", lazy.window.toggle_minimize(), desc="Minimize the window"),
+    Key([mod, "shift"], "m", lazy.window.toggle_maximize(), desc="Maximize the window")
     #Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Turns up the volume"),
     #Key([], "XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Turns down the volume"),
     #Key([], "XF86MonBrightnessUp", lazy.widget["backlight"].change_backlight(widget.backlight.ChangeDirection.UP), desc="Turns up the brightess"),
     #Key([], "XF86MonBrightnessDown",lazy.widget["backlight"].change_backlight(widget.backlight.ChangeDirection.DOWN), desc="Turns down the brightness")
-
+    #Key(['mod1', 'control'], f"F{n}", lazy.core.change_vt(n), desc=f"Switch to virtual terminal #{n}") for n in range(1, 7),
 ]
+
+keys.extend([
+])
 
 groups = [Group(i) for i in "yuiop"]
 
@@ -142,14 +142,15 @@ screens = [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
                 widget.Prompt(),
-                widget.WindowName(),
+                #widget.WindowName(),
+                widget.WindowTabs(),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("Commit 2 config.", name="default"),
+                widget.TextBox("Commit  10 config.", name="default"),
                 #widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 widget.StatusNotifier(),
