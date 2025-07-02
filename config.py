@@ -76,19 +76,18 @@ keys = [
     Key([mod, "shift"], "r", lazy.spawn("rofi -show drun"), desc="Application list"),
     Key([mod], "m", lazy.window.toggle_minimize(), desc="Minimize the window"),
     Key([mod, "shift"], "m", lazy.window.toggle_maximize(), desc="Maximize the window"),
-    #Key([mod], "n", lazy.spawn("librewolf"), desc="Spawns internet browser"),
-    #Key([mod, "shift"], "n", lazy.spawn("spacefm"), desc="Spawns file manager"),
-    #Key([mod], "b", lazy.spawn("keepassxc"), desc="Spawns the password manager"),
-    #Key([mod, "shift"], "b", lazy.spawn("thunderbird"), desc="spawns the email client"),
+    Key([mod], "1", lazy.spawn("librewolf"), desc="Spawns internet browser"),
+    Key([mod, "shift"], "1", lazy.spawn("firefox"), desc="Spawns secondary internet browser"),
+    Key([mod], "2", lazy.spawn("spacefm"), desc="Spawns file manager"),
+    Key([mod], "3", lazy.spawn("keepassxc"), desc="Spawns the password manager"),
+    Key([mod], "4", lazy.spawn("thunderbird"), desc="spawns the email client"),
+    Key([mod], "5", lazy.spawn("libreoffice"), desc="spawns the email client"),
     #Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Turns up the volume"),
     #Key([], "XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Turns down the volume"),
     #Key([], "XF86MonBrightnessUp", lazy.widget["backlight"].change_backlight(widget.backlight.ChangeDirection.UP), desc="Turns up the brightess"),
     #Key([], "XF86MonBrightnessDown",lazy.widget["backlight"].change_backlight(widget.backlight.ChangeDirection.DOWN), desc="Turns down the brightness")
     #Key(['mod1', 'control'], f"F{n}", lazy.core.change_vt(n), desc=f"Switch to virtual terminal #{n}") for n in range(1, 7),
 ]
-
-keys.extend([
-])
 
 groups = [Group(i) for i in "yuiop"]
 
@@ -148,6 +147,7 @@ screens = [
                 widget.Prompt(),
                 #widget.WindowName(),
                 widget.WindowTabs(),
+                #widget.WindowTabs(mouse_callbacks {}),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
@@ -175,6 +175,8 @@ screens = [
         # x11_drag_polling_rate = 60,
     ),
 ]
+
+#lazy.screen.set_wallpaper("~/Pictures/Desktop/\'Poptarts with Cheese.jpg\'", "stretch")
 
 # Drag floating layouts.
 mouse = [
@@ -211,6 +213,8 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
+
+
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
